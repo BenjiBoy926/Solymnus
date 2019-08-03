@@ -9,10 +9,10 @@
  * with the projection of the forward vector of the given transform component
  * ----------------------------------------
  */
-public class SupplyCameraSensitiveMotionVectors : SupplyVector2PlaneTo3Plane
+public class SupplyCameraSensitiveVectors : SupplyVector2PlaneTo3Plane
 {
     [SerializeField]
-    [Tooltip("Tag on the camera used to transform the motion vectors")]
+    [Tooltip("Tag on the camera used to transform the vectors")]
     private string cameraTag = "MainCamera";
 
     // Transform component on the game object with the given tag 
