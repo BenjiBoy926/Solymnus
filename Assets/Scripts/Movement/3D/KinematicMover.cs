@@ -60,7 +60,27 @@ public class KinematicMover : MonoBehaviour
     {
         _rb.velocity = velocity;
     }
-
+    // Move in the given direction, but leave the given axes unaffected
+    public virtual void MoveTowards(Vector3 direction, float speed, AxisIgnore ignore)
+    {
+        MoveTowards(direction.ScaledVector(speed), ignore);
+    }
+    public virtual void MoveTowards(Vector3 velocity, AxisIgnore ignore)
+    {
+        if (ignore.xIgnore)
+        {
+            velocity.x = _rb.velocity.x;
+        }
+        if (ignore.yIgnore)
+        {
+            velocity.y = _rb.velocity.y;
+        }
+        if (ignore.zIgnore)
+        {
+            velocity.z = _rb.velocity.z;
+        }
+        MoveTowards(velocity);
+    }
     // Put the object at a position and set it off in a direction with a particular speed
     public virtual void MoveTowardsFrom(Vector3 origin, Vector3 direction, float speed)
     {

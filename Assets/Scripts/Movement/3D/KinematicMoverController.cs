@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /*
  * CLASS KinematicMoverController
@@ -31,6 +30,10 @@ public class KinematicMoverController : MonoBehaviour
     public void Move(Vector3 dir)
     {
         mover.MoveTowards(dir, speed);
+    }
+    public void Move(Vector3 dir, AxisIgnore ignore)
+    {
+        mover.MoveTowards(dir, speed, ignore);
     }
 
     // Multiply the given scalar by the speed scalar

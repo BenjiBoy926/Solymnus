@@ -68,6 +68,20 @@ public class ForceSimulatedMover : KinematicMover
             base.MoveTowards(velocity);
         }
     }
+    public override void MoveTowards(Vector3 direction, float speed, AxisIgnore ignore)
+    {
+        if (!_isForced)
+        {
+            base.MoveTowards(direction, speed, ignore);
+        }
+    }
+    public override void MoveTowards(Vector3 velocity, AxisIgnore ignore)
+    {
+        if (!_isForced)
+        {
+            base.MoveTowards(velocity, ignore);
+        }
+    }
     public override void MoveToPoint(Vector3 point, float time)
     {
         if (!_isForced)
@@ -93,6 +107,16 @@ public class ForceSimulatedMover : KinematicMover
     {
         _isForced.Deactivate();
         base.MoveTowards(velocity);
+    }
+    public void OverrideMoveTowards(Vector3 direction, float speed, AxisIgnore ignore)
+    {
+        _isForced.Deactivate();
+        base.MoveTowards(direction, speed, ignore);
+    }
+    public void OverrideMoveTowards(Vector3 velocity, AxisIgnore ignore)
+    {
+        _isForced.Deactivate();
+        base.MoveTowards(velocity, ignore);
     }
     public void OverrideMoveToPoint(Vector3 point, float time)
     {

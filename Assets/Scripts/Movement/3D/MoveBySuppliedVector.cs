@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class MoveBySuppliedVector : MonoBehaviour
 {
@@ -13,9 +12,12 @@ public class MoveBySuppliedVector : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the game object with a script that will supply the movement vector")]
     private VectorSupplier supplier;
+    [SerializeField]
+    [Tooltip("Choose whether certain axes should be unaffected by movement")]
+    private AxisIgnore ignoreInfo;
 
     private void Update()
     {
-        mover.Move(supplier.component.Supply());
+        mover.Move(supplier.component.Supply(), ignoreInfo);
     }
 }
