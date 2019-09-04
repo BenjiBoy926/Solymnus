@@ -23,7 +23,7 @@ public class Emitter2D : MonoBehaviour, IEmitter2D
     [SerializeField]
     private float _objectVelocity;   // Speed at which objects travel
     [SerializeField]
-    private List<Anchor2D> objectAnchors; // Used to determine the local origin the objects start at and the direction they are fired off in relative to the emitter's aim 
+    private List<Ray2D> objectAnchors; // Used to determine the local origin the objects start at and the direction they are fired off in relative to the emitter's aim 
     [SerializeField]
     [Tooltip("Set of events invoked when the emitter emits")]
     private EmissionEvent2D _emissionEvent;    // Event called whenever the the emitter emits
@@ -50,10 +50,10 @@ public class Emitter2D : MonoBehaviour, IEmitter2D
 
         // Rotate all origins and directions in the anchors by the tilt angle,
         // and add an impulse force to an object in the pool using rotated vectors
-        foreach (Anchor2D anchor in objectAnchors)
+        foreach (Ray2D ray in objectAnchors)
         {
-            localOrigin = anchor.origin.RotatedVector(tiltAngle);
-            force = anchor.direction.RotatedVector(tiltAngle).ScaledVector(_objectVelocity);
+            localOrigin = ray.origin.RotatedVector(tiltAngle);
+            force = ray.direction.RotatedVector(tiltAngle).ScaledVector(_objectVelocity);
             LaunchBody(pool.getOneQuick, localOrigin, force);
         }
 

@@ -4,15 +4,15 @@ using System.Collections.Generic;
 public class Emitter : MonoBehaviour, IEmitter
 {
     /*
- * Editor data
- */
+     * Editor data
+     */
 
     [SerializeField]
     private GameObject emittedObject;
     [SerializeField]
     private float _objectVelocity;   // Speed at which objects travel
     [SerializeField]
-    private List<Anchor> objectAnchors; // Used to determine the local origin the objects start at and the direction they are fired off in relative to the emitter's aim 
+    private List<Ray> objectAnchors; // Used to determine the local origin the objects start at and the direction they are fired off in relative to the emitter's aim 
     [SerializeField]
     [Tooltip("Set of events invoked when the emitter emits")]
     private EmissionEvent _emissionEvent;    // Event called whenever the the emitter emits
@@ -36,10 +36,10 @@ public class Emitter : MonoBehaviour, IEmitter
 
         // Rotate all origins and directions in the anchors by the tilt angle,
         // and add an impulse force to an object in the pool using rotated vectors
-        foreach (Anchor anchor in objectAnchors)
+        foreach (Ray ray in objectAnchors)
         {
-            localOrigin = anchor.origin.Transform(Vector3.forward, aimVector);
-            force = anchor.direction.Transform(Vector3.forward, aimVector).ScaledVector(_objectVelocity);
+            localOrigin = ray.origin.Transform(Vector3.forward, aimVector);
+            force = ray.direction.Transform(Vector3.forward, aimVector).ScaledVector(_objectVelocity);
             LaunchBody(pool.getOneQuick, localOrigin, force);
         }
 
