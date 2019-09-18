@@ -22,6 +22,7 @@ public class State : MonoBehaviour, ILabelledComponent
     public const float LOCKED_ACTIVATION_DURATION = -1f;
 
     [SerializeField]
+    [TagSelector]
     private string _label;   // Label to describe this state
     public string label { get { return _label; } }
     private bool mainState; // Current state

@@ -28,6 +28,7 @@ public class Stockpile : MonoBehaviour, ILabelledComponent
      */ 
 
     [SerializeField]
+    [TagSelector]
     private string _label;   // Explanatory label describing what the stock represents
     public string label { get { return _label; } }
     [SerializeField]

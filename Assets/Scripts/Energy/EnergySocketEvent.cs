@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnergySocketEvent : EnergyEvent
+public class EnergySocketEvent : TestedEnergyEvent
 {
     [SerializeField]
     [Tooltip("Energy socket that triggers the energy test")]

@@ -1,7 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class EnergyEvent : MonoBehaviour
+/*
+ * CLASS TestedEnergyEvent
+ * -----------------------
+ * Invokes the energy event only if the amount absorbed in the event
+ * passes the numeric constraint supplied
+ * -----------------------
+ */
+
+public abstract class TestedEnergyEvent : MonoBehaviour
 {
     /*
     * PUBLIC TYPEDEFS

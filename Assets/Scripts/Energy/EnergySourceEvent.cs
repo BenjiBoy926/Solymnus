@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnergySourceEvent : EnergyEvent
+public class EnergySourceEvent : TestedEnergyEvent
 {
     /*
      * PUBLIC DATA

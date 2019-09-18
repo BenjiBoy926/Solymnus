@@ -4,13 +4,11 @@ using UnityEngine.Events;
 /*
  * CLASS EnergySource
  * ------------------
- * Generic source of energy transfers energy to any energy socket it
- * comes into physical contact with. Energy sockets interpret the energy
- * and raises an event, passing amount actually absorbed
+ * Generic source of energy transfers energy to an energy socket
  * ------------------
  */ 
 
-public class EnergySource : CollisionEnterComponentProcessor<EnergySocket>
+public class EnergySource : MonoBehaviour
 {
     /*
      * PUBLIC TYPEDEFS
@@ -52,7 +50,7 @@ public class EnergySource : CollisionEnterComponentProcessor<EnergySocket>
     }
 
     // Transfer energy to the given energy socket and call the event if it exists
-    protected override void ProcessComponent(EnergySocket socket)
+    public void TransferEnergy(EnergySocket socket)
     {
         int amountAbsorbed = socket.AbsorbEnergy(this);
         energyTransferredEvent.Invoke(new EnergyEventData(this, socket, amountAbsorbed));
