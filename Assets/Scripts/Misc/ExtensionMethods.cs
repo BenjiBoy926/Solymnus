@@ -121,4 +121,16 @@ public static class ExtensionMethods
     {
         return target.position - me.position;
     }
+
+    public static TComponent GetComponent<TComponent>(this GameObject obj, bool includeChildren)
+    {
+        if (includeChildren)
+        {
+            return obj.GetComponentInChildren<TComponent>();
+        }
+        else
+        {
+            return obj.GetComponent<TComponent>();
+        }
+    }
 }
