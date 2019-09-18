@@ -37,13 +37,6 @@ public class EnergySocket : MonoBehaviour
     private EnergyEvent _energyAbsorbedEvent;
     public EnergyEvent energyAbsorbedEvent { get { return _energyAbsorbedEvent; } }
 
-    [SerializeField]
-    [Tooltip("State determines if the socket can absorb negative energy")]
-    private State hazardsImmunized; // If true, the energy socket cannot absorb negative energy
-    [SerializeField]
-    [Tooltip("State determines if the socket can absorb positive energy")]
-    private State healersImmunized; // If true, the energy socket cannot absorb positive energy
-
     // Process the energy and raise the event
     public int AbsorbEnergy(EnergySource source)
     {
@@ -61,7 +54,7 @@ public class EnergySocket : MonoBehaviour
         bool hazardous = hazards.Contains(energy.tag);
         bool healing = healers.Contains(energy.tag);
 
-        if ((hazardous && !hazardsImmunized) || (healing && !healersImmunized))
+        if (hazardous || healing)
         {
             // Find an intake info whose type matches the source type
             EnergyIntakeInfo matchedInfo = intakeInfo.Find(x => x.type == energy.type);
@@ -101,50 +94,5 @@ public class EnergySocket : MonoBehaviour
         {
             intakeInfo.Add(new EnergyIntakeInfo(energyType, multiplier));
         }
-    }
-
-    // Cause the energy socket not to respond to hazards
-    public void ImmunizeHazards()
-    {
-        hazardsImmunized.Lock(true);
-    }
-    public void ImmunizeHazards(float time)
-    {
-        hazardsImmunized.Activate(time);
-    }
-    public void ClearHazardImmunization()
-    {
-        hazardsImmunized.Unlock();
-        hazardsImmunized.Deactivate();
-    }
-    // Cause the energy socket not to respond to healers
-    public void ImmunizeHealers()
-    {
-        healersImmunized.Lock(true);
-    }
-    public void ImmunizeHealers(float time)
-    {
-        healersImmunized.Activate(time);
-    }
-    public void ClearHealerImmunization()
-    {
-        healersImmunized.Unlock();
-        healersImmunized.Deactivate();
-    }
-    // Cause the energy socket not to respond to hazards or healers
-    public void Immunize()
-    {
-        ImmunizeHazards();
-        ImmunizeHealers();
-    }
-    public void Immunize(float time)
-    {
-        ImmunizeHazards(time);
-        ImmunizeHealers(time);
-    }
-    public void ClearImmunization()
-    {
-        ClearHazardImmunization();
-        ClearHealerImmunization();
     }
 }
